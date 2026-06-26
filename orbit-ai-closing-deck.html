@@ -94,24 +94,23 @@
   .bcol.bad li::before{content:"x";position:absolute;left:0;color:var(--rose);font-weight:800}
   .bcol.good li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
 
-  /* --- ROI CALC (inputs left, results right) --- */
-  .roi-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3cqi;margin-top:2cqi;align-items:start}
+  /* --- ROI CALC --- */
+  .roi-wrap{display:flex;flex-direction:column;gap:2cqi;margin-top:1.6cqi}
 
-  .inputs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2cqi}
-  .ni{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:1.2cqi;padding:1.4cqi}
-  .ni label{display:block;font-size:1.1cqi;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);font-weight:700;margin-bottom:.7cqi}
-  .ni input{width:100%;background:#070f1c;border:1px solid var(--line);border-radius:.7cqi;padding:.9cqi;color:var(--ink);font-size:2.4cqi;font-weight:800;text-align:center;outline:none;font-family:inherit}
+  .inputs-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4cqi}
+  .ni{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:1.2cqi;padding:1.4cqi 1.6cqi}
+  .ni label{display:block;font-size:1.1cqi;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);font-weight:700;margin-bottom:.8cqi}
+  .ni input{width:100%;background:#070f1c;border:1px solid var(--line);border-radius:.7cqi;padding:.9cqi;color:var(--ink);font-size:2.6cqi;font-weight:800;text-align:center;outline:none;font-family:inherit}
   .ni input:focus{border-color:var(--cyan)}
 
-  .roi-results{display:flex;flex-direction:column;gap:1.2cqi}
-  .roi-big{background:linear-gradient(160deg,rgba(31,182,255,.13),rgba(31,182,255,.04));border:1px solid rgba(31,182,255,.35);border-radius:1.8cqi;padding:2.4cqi;text-align:center}
-  .roi-big .val{font-size:7.5cqi;font-weight:800;color:#7fe0ff;line-height:.95}
-  .roi-big .sub{font-size:1.5cqi;color:var(--dim);margin-top:.8cqi}
+  .roi-results{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:1.4cqi;align-items:stretch}
+  .roi-big{background:linear-gradient(160deg,rgba(31,182,255,.13),rgba(31,182,255,.04));border:1px solid rgba(31,182,255,.35);border-radius:1.4cqi;padding:2cqi;text-align:center;display:flex;flex-direction:column;justify-content:center}
+  .roi-big .val{font-size:5.5cqi;font-weight:800;color:#7fe0ff;line-height:.95}
+  .roi-big .sub{font-size:1.2cqi;color:var(--dim);margin-top:.7cqi}
 
-  .roi-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1cqi}
-  .rm{border:1px solid var(--line);border-radius:1.2cqi;padding:1.4cqi;background:rgba(255,255,255,.02);text-align:center}
-  .rm .rv{font-size:2.6cqi;font-weight:800;color:var(--green);line-height:1}
-  .rm .rl{font-size:1.1cqi;color:var(--dim);margin-top:.4cqi;line-height:1.3}
+  .rm{border:1px solid var(--line);border-radius:1.4cqi;padding:1.6cqi;background:rgba(255,255,255,.02);text-align:center;display:flex;flex-direction:column;justify-content:center}
+  .rm .rv{font-size:2.8cqi;font-weight:800;color:var(--green);line-height:1}
+  .rm .rl{font-size:1.1cqi;color:var(--dim);margin-top:.5cqi;line-height:1.3}
 
   /* --- what you get --- */
   .clist{width:100%;margin-top:1.8cqi}
@@ -187,7 +186,7 @@
     <div class="kick">The 24/7 AI Receptionist</div>
     <h1>Your shop never misses <span class="c">another call.</span></h1>
     <p class="lede w">A live look at the revenue hiding in your missed calls and how to answer every one of them, day or night.</p>
-    <div class="meta">Prepared for <b id="coverBusiness">Your Business</b><br><span id="coverTeam">The Orbit AI Team</span></div>
+    <div class="meta"><span id="coverTeam">The Orbit AI Team</span></div>
   </div></section>
 
   <!-- 2 HOOK + REALITY -->
@@ -274,40 +273,35 @@
     </div>
   </div></section>
 
-  <!-- 9 ROI CALCULATOR (left = inputs, right = live results) -->
+  <!-- 9 ROI CALCULATOR -->
   <section class="slide"><div class="z">
     <div class="kick">Your numbers</div>
     <h2 style="margin-bottom:0">What the open line costs you, live.</h2>
     <div class="roi-wrap">
-      <!-- LEFT: inputs -->
-      <div>
-        <p style="font-size:1.3cqi;color:var(--dim);margin-bottom:1.2cqi;margin-top:.8cqi">Plug in your shop's figures.</p>
-        <div class="inputs-grid">
-          <div class="ni"><label>Avg ticket ($)</label><input id="r_ticket" type="number" value="450"></div>
-          <div class="ni"><label>Calls / month</label><input id="r_calls" type="number" value="220"></div>
-          <div class="ni"><label>% missed</label><input id="r_missed" type="number" value="30"></div>
-          <div class="ni"><label>Win rate (%)</label><input id="r_close" type="number" value="25"></div>
-        </div>
+      <!-- INPUTS: 4 across -->
+      <div class="inputs-row">
+        <div class="ni"><label>Avg ticket ($)</label><input id="r_ticket" type="number" value="450"></div>
+        <div class="ni"><label>Calls / month</label><input id="r_calls" type="number" value="220"></div>
+        <div class="ni"><label>% missed</label><input id="r_missed" type="number" value="30"></div>
+        <div class="ni"><label>Win rate (%)</label><input id="r_close" type="number" value="25"></div>
       </div>
-      <!-- RIGHT: results -->
+      <!-- RESULTS: big number + 3 metrics in one row -->
       <div class="roi-results">
         <div class="roi-big">
           <div class="val" id="roiMonthly">$7,425</div>
-          <div class="sub">recoverable per month by answering every call</div>
+          <div class="sub">recoverable per month</div>
         </div>
-        <div class="roi-metrics">
-          <div class="rm">
-            <div class="rv" id="roiAnnual">$89,100</div>
-            <div class="rl">per year left on the table</div>
-          </div>
-          <div class="rm">
-            <div class="rv" id="payMult">12x</div>
-            <div class="rl">return vs. $597/mo cost</div>
-          </div>
-          <div class="rm">
-            <div class="rv" id="payDays">3 days</div>
-            <div class="rl">to pay for itself</div>
-          </div>
+        <div class="rm">
+          <div class="rv" id="roiAnnual">$89,100</div>
+          <div class="rl">per year left on the table</div>
+        </div>
+        <div class="rm">
+          <div class="rv" id="payMult">12x</div>
+          <div class="rl">return vs. $597/mo</div>
+        </div>
+        <div class="rm">
+          <div class="rv" id="payDays">3 days</div>
+          <div class="rl">to pay for itself</div>
         </div>
       </div>
     </div>
@@ -341,8 +335,7 @@
           <div class="pcard">
             <h3>Talk minutes</h3>
             <div class="pr">$0.19<small>/min</small></div>
-            <ul><li>1,000 min $250</li><li>5,000 min $950</li></ul>
-            <p style="margin-top:.7cqi">Only pay for conversations that happen.</p>
+            <p>Only pay for conversations that happen.</p>
           </div>
         </div>
         <p class="cap" style="margin-top:1cqi">Pay monthly, or prepay quarterly and save 15%.</p>
@@ -350,19 +343,11 @@
     </div>
   </div></section>
 
-  <!-- 11 FOUNDING PARTNER -->
-  <section class="slide"><div class="z">
-    <div class="kick">Founding partner</div>
-    <h2>Get in now. <span class="c">Your rate is locked forever.</span></h2>
-    <p class="lede w" style="max-width:66%;margin-top:2cqi">Join now and your pricing is locked permanently, even as we raise it for future clients. The receptionist is live within days, and every missed call from that point on is revenue your shop keeps.</p>
-  </div></section>
-
-  <!-- 12 CLOSE -->
+  <!-- 11 CLOSE -->
   <section class="slide"><div class="z">
     <div class="orbrow"><span class="orb"></span><b>Orbit AI Automation</b></div>
     <h1>Ready to stop <span class="c">missing calls?</span></h1>
     <p class="lede">Recovering <b id="closeAnnual" style="color:#34d399">$89,100</b> a year starts the day the front desk goes live.</p>
-    <button class="btn" id="ctaBtn">Let's get started →</button>
     <div class="meta"><span id="closeTeam">The Orbit AI Team</span> · Orbit AI Automation</div>
   </div></section>
 
@@ -429,7 +414,6 @@
     x0=null;
   },{passive:true});
   document.getElementById("pdfBtn").addEventListener("click",function(){window.print();});
-  document.getElementById("ctaBtn").addEventListener("click",function(){go(0);});
 
   var team=[], tList=document.getElementById("teamList");
   function renderTeam(){
@@ -463,3 +447,4 @@
 </script>
 </body>
 </html>
+
